@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APP Engenharia Química | Projetos & Processos Industriais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0B1F3A;
+    --blue:    #0D4C92;
+    --sky:     #1A7EC8;
+    --acid:    #00C2A8;   /* signature teal accent */
+    --steel:   #3D5A73;
+    --mist:    #EBF3FB;
+    --smoke:   #F4F7FA;
+    --white:   #FFFFFF;
+    --text:    #1A2B3C;
+    --muted:   #5E7388;
+    --rule:    #D0DDE8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  /* ─── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,31,58,0.96);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 64px;
+    border-bottom: 2px solid var(--acid);
+  }
+
+  .nav-brand {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    width: 38px; height: 38px;
+    background: var(--acid);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .nav-logo span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 15px; color: var(--navy);
+    line-height: 1;
+  }
+
+  .nav-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 18px; color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-name em {
+    color: var(--acid); font-style: normal;
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.78); font-size: 13px; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.4px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--acid); }
+
+  .nav-cta {
+    background: var(--acid); color: var(--navy) !important;
+    padding: 8px 20px; border-radius: 4px;
+    font-weight: 600 !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #00a892 !important; color: var(--navy) !important; }
+
+  /* ─── HERO ─────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(160deg, rgba(11,31,58,0.92) 0%, rgba(13,76,146,0.85) 60%, rgba(0,194,168,0.15) 100%),
+      url('https://images.unsplash.com/photo-1588421357574-87938a86fa28?w=1600&q=80') center/cover no-repeat;
+    display: flex; align-items: center;
+    padding: 64px 5vw 0;
+  }
+
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--acid);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 2px; background: var(--acid);
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 800; line-height: 1.05;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 span { color: var(--acid); }
+
+  .hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.75);
+    max-width: 520px; margin-bottom: 40px; font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--acid); color: var(--navy);
+    padding: 14px 32px; border-radius: 4px;
+    font-weight: 700; font-size: 14px; text-decoration: none;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,194,168,0.35);
+  }
+
+  .btn-ghost {
+    border: 1.5px solid rgba(255,255,255,0.35); color: var(--white);
+    padding: 14px 32px; border-radius: 4px;
+    font-weight: 500; font-size: 14px; text-decoration: none;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--acid); background: rgba(0,194,168,0.08); }
+
+  /* ─── HERO CARD ─────────────────────────────────── */
+  .hero-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,194,168,0.25);
+    border-radius: 12px; padding: 36px;
+    backdrop-filter: blur(12px);
+  }
+
+  .hero-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--acid);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,194,168,0.2);
+  }
+
+  .hero-services { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+  .hero-services li {
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 400;
+    padding: 12px 14px; border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .hero-services li:hover { background: rgba(0,194,168,0.12); }
+
+  .svc-icon {
+    width: 34px; height: 34px; border-radius: 6px;
+    background: rgba(0,194,168,0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .svc-icon svg { width: 18px; height: 18px; stroke: var(--acid); fill: none; stroke-width: 2; }
+
+  /* ─── BAND ──────────────────────────────────────── */
+  .stats-band {
+    background: var(--navy);
+    padding: 28px 5vw;
+    border-top: 3px solid var(--acid);
+  }
+  .stats-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; gap: 0; align-items: stretch;
+  }
+  .stat-item {
+    flex: 1; text-align: center; padding: 12px 24px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px; font-weight: 800; color: var(--acid); line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 4px; letter-spacing: 0.5px; }
+
+  /* ─── SECTIONS ──────────────────────────────────── */
+  section { padding: 96px 5vw; }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--sky);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 800; color: var(--navy); line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-title span { color: var(--sky); }
+
+  .section-rule {
+    width: 56px; height: 3px;
+    background: var(--acid);
+    margin-bottom: 28px;
+  }
+
+  .section-lead {
+    font-size: 17px; color: var(--muted);
+    max-width: 640px; line-height: 1.75;
+  }
+
+  /* ─── SERVICES GRID ─────────────────────────────── */
+  #servicos { background: var(--smoke); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 32px 28px;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    position: relative; overflow: hidden;
+    display: block;
+  }
+  .service-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--acid);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .service-card:hover {
+    border-color: var(--sky);
+    box-shadow: 0 8px 32px rgba(13,76,146,0.1);
+    transform: translateY(-3px);
+  }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .sc-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    background: var(--mist);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .sc-icon svg { width: 26px; height: 26px; stroke: var(--blue); fill: none; stroke-width: 1.8; }
+
+  .sc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .sc-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  .sc-arrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 20px; font-size: 13px; font-weight: 600;
+    color: var(--sky); text-decoration: none;
+  }
+  .sc-arrow svg { width: 16px; height: 16px; stroke: var(--sky); fill: none; stroke-width: 2; transition: transform 0.2s; }
+  .service-card:hover .sc-arrow svg { transform: translateX(4px); }
+
+  /* ─── EMPRESA ──────────────────────────────────── */
+  #empresa .section-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+
+  .empresa-visual {
+    position: relative;
+  }
+
+  .empresa-img-wrap {
+    border-radius: 12px; overflow: hidden;
+    aspect-ratio: 4/3;
+    background:
+      linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .empresa-molecule {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .emp-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--acid); color: var(--navy);
+    padding: 20px 24px; border-radius: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.5px; line-height: 1.3;
+    text-align: center;
+  }
+
+  .mvv-grid {
+    display: grid; gap: 24px; margin-top: 40px;
+  }
+
+  .mvv-card {
+    padding: 24px; border-left: 4px solid var(--acid);
+    background: var(--smoke); border-radius: 0 8px 8px 0;
+  }
+
+  .mvv-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--acid); margin-bottom: 8px;
+  }
+
+  .mvv-text { font-size: 15px; color: var(--text); line-height: 1.6; }
+
+  /* ─── SUSTENTABILIDADE ──────────────────────────── */
+  #sustentabilidade {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  #sustentabilidade::before {
+    content: '';
+    position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+    background: radial-gradient(ellipse at 80% 50%, rgba(0,194,168,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #sustentabilidade .section-eyebrow { color: var(--acid); }
+  #sustentabilidade .section-title { color: var(--white); }
+  #sustentabilidade .section-lead { color: rgba(255,255,255,0.65); }
+
+  .sust-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px;
+  }
+
+  .sust-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,194,168,0.2);
+    border-radius: 10px; padding: 32px;
+    transition: border-color 0.25s;
+  }
+  .sust-card:hover { border-color: var(--acid); }
+
+  .sust-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 48px; font-weight: 800; color: var(--acid);
+    line-height: 1; margin-bottom: 12px;
+  }
+
+  .sust-title {
+    font-size: 15px; font-weight: 600; color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .sust-text { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+  .definition-box {
+    margin-top: 56px;
+    border: 1px solid rgba(0,194,168,0.3);
+    border-radius: 10px; padding: 36px 40px;
+    background: rgba(0,194,168,0.05);
+    display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start;
+  }
+
+  .def-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(0,194,168,0.15);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .def-icon svg { width: 28px; height: 28px; stroke: var(--acid); fill: none; stroke-width: 1.8; }
+
+  .def-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--acid); margin-bottom: 8px;
+  }
+
+  .def-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; }
+
+  /* ─── CTA ───────────────────────────────────────── */
+  #contato {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+    text-align: center;
+  }
+
+  #contato .section-title { color: var(--white); }
+  #contato .section-lead { color: rgba(255,255,255,0.7); margin: 0 auto 40px; }
+  #contato .section-rule { margin: 16px auto 28px; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px; margin-top: 56px; text-align: left;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 28px; border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .cc-icon {
+    width: 44px; height: 44px; border-radius: 8px;
+    background: rgba(0,194,168,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .cc-icon svg { width: 22px; height: 22px; stroke: var(--acid); fill: none; stroke-width: 2; }
+
+  .cc-label { font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--acid); margin-bottom: 6px; }
+
+  .cc-value { font-size: 15px; color: var(--white); font-weight: 500; }
+
+  /* ─── FOOTER ────────────────────────────────────── */
+  footer {
+    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 5vw;
+  }
+
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+  .footer-copy strong { color: var(--acid); }
+
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-links a:hover { color: var(--acid); }
+
+  /* ─── RESPONSIVE ─────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    #empresa .section-inner { grid-template-columns: 1fr; }
+    .sust-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .definition-box { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo"><span>AEQ</span></div>
+    <span class="nav-name">APP <em>Engenharia</em> Química</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#empresa">Empresa</a></li>
+    <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+    <li><a href="#contato" class="nav-cta">Diagnóstico Gratuito</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Engenharia Química Industrial</p>
+      <h1>Processos que<br><span>transformam</span><br>indústrias.</h1>
+      <p class="hero-sub">Desenvolvimento de processos e projetos especializados para indústrias de transformação. Tecnologia avançada, eficiência operacional, resultados sustentáveis.</p>
+      <div class="hero-btns">
+        <a href="mailto:apportugal@hotmail.com" class="btn-primary">Solicitar Diagnóstico</a>
+        <a href="#servicos" class="btn-ghost">Ver Serviços</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>Nossas Soluções</h3>
+      <ul class="hero-services">
+        <li>
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          Automação de Equipamentos
+        </li>
+        <li>
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          Manutenção Industrial
+        </li>
+        <li>
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          Atualização Técnica
+        </li>
+        <li>
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          Treinamento Operacional
+        </li>
+        <li>
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          Instalação & Reformas
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Serviços Especializados</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">B2B</div>
+      <div class="stat-label">Foco Industrial</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">360°</div>
+      <div class="stat-label">Soluções Completas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Comprometimento Técnico</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="section-inner">
+    <p class="section-eyebrow">O que fazemos</p>
+    <h2 class="section-title">Serviços para lava-louças e<br><span>lava-roupas industriais</span></h2>
+    <div class="section-rule"></div>
+    <p class="section-lead">Soluções técnicas completas para equipamentos industriais de lavagem, desde a instalação até o treinamento da sua equipe operacional.</p>
+
+    <div class="services-grid">
+
+      <a href="http://alfaengenhariaquimica.com.br/autom.html" class="service-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="sc-title">Automação</div>
+        <p class="sc-desc">Modernização dos sistemas de controle, sensores e atuadores para maior eficiência, repetibilidade e redução de intervenção manual.</p>
+        <span class="sc-arrow">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="http://alfaengenhariaquimica.com.br/manuten.html" class="service-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="sc-title">Manutenção</div>
+        <p class="sc-desc">Manutenção preventiva e corretiva para garantir disponibilidade máxima dos equipamentos e prolongar a vida útil dos ativos industriais.</p>
+        <span class="sc-arrow">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="http://alfaengenhariaquimica.com.br/instal.html" class="service-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="sc-title">Instalação</div>
+        <p class="sc-desc">Instalação técnica de novos equipamentos com adequação às normas de segurança, elétrica e hidráulica exigidas pelo setor industrial.</p>
+        <span class="sc-arrow">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="http://alfaengenhariaquimica.com.br/atual.html" class="service-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <div class="sc-title">Atualização Técnica</div>
+        <p class="sc-desc">Retrofit e atualização de equipamentos legados para adequação às exigências sanitárias, ambientais e de eficiência energética atuais.</p>
+        <span class="sc-arrow">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="http://alfaengenhariaquimica.com.br/reformas.html" class="service-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <div class="sc-title">Reformas</div>
+        <p class="sc-desc">Recondicionamento completo de equipamentos desgastados: estrutura, componentes hidráulicos, elétricos e mecânicos com padrão de qualidade.</p>
+        <span class="sc-arrow">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+      <a href="http://alfaengenhariaquimica.com.br/treinamento.html" class="service-card">
+        <div class="sc-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="sc-title">Treinamento Operacional</div>
+        <p class="sc-desc">Capacitação técnica das equipes de operação e manutenção para uso correto, seguro e eficiente dos equipamentos industriais.</p>
+        <span class="sc-arrow">Saiba mais <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- EMPRESA -->
+<section id="empresa">
+  <div class="section-inner">
+    <div class="empresa-text">
+      <p class="section-eyebrow">Quem Somos</p>
+      <h2 class="section-title">APP Engenharia Química<br><span>Projetos Ltda.</span></h2>
+      <div class="section-rule"></div>
+      <p class="section-lead">Empresa especializada no desenvolvimento de processos e projetos na área de engenharia química, atendendo indústrias de transformação e afins com soluções técnicas avançadas.</p>
+
+      <div class="mvv-grid">
+        <div class="mvv-card">
+          <div class="mvv-label">Missão</div>
+          <div class="mvv-text">Proporcionar aos clientes soluções com tecnologia avançada, elevando a eficiência e a competitividade de seus processos industriais.</div>
+        </div>
+        <div class="mvv-card">
+          <div class="mvv-label">Valores</div>
+          <div class="mvv-text">Ética como fundamento de cada relação. Apresentar ao cliente todas as alternativas disponíveis para que ele tenha liberdade real de escolha.</div>
+        </div>
+        <div class="mvv-card">
+          <div class="mvv-label">Visão</div>
+          <div class="mvv-text">Construir o futuro hoje — tornando o presente obsoleto por meio da inovação contínua e da busca por excelência em engenharia.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empresa-visual">
+      <div class="empresa-img-wrap">
+        <svg class="empresa-molecule" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Molecular structure illustration -->
+          <defs>
+            <radialGradient id="bg" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#1A7EC8" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#0B1F3A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="300" fill="url(#bg)"/>
+          <!-- Bonds -->
+          <line x1="200" y1="150" x2="120" y2="100" stroke="#00C2A8" stroke-width="2.5" opacity="0.7"/>
+          <line x1="200" y1="150" x2="280" y2="100" stroke="#00C2A8" stroke-width="2.5" opacity="0.7"/>
+          <line x1="200" y1="150" x2="200" y2="230" stroke="#00C2A8" stroke-width="2.5" opacity="0.7"/>
+          <line x1="120" y1="100" x2="60" y2="140" stroke="#1A7EC8" stroke-width="2" opacity="0.5"/>
+          <line x1="120" y1="100" x2="100" y2="40" stroke="#1A7EC8" stroke-width="2" opacity="0.5"/>
+          <line x1="280" y1="100" x2="340" y2="140" stroke="#1A7EC8" stroke-width="2" opacity="0.5"/>
+          <line x1="280" y1="100" x2="300" y2="40" stroke="#1A7EC8" stroke-width="2" opacity="0.5"/>
+          <line x1="200" y1="230" x2="150" y2="270" stroke="#1A7EC8" stroke-width="2" opacity="0.5"/>
+          <line x1="200" y1="230" x2="250" y2="270" stroke="#1A7EC8" stroke-width="2" opacity="0.5"/>
+          <!-- Atoms -->
+          <circle cx="200" cy="150" r="22" fill="#0D4C92" stroke="#00C2A8" stroke-width="2.5"/>
+          <text x="200" y="155" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="14" fill="#00C2A8">C</text>
+          <circle cx="120" cy="100" r="16" fill="#0B2A50" stroke="#1A7EC8" stroke-width="2"/>
+          <text x="120" y="105" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="12" fill="#1A7EC8">H</text>
+          <circle cx="280" cy="100" r="16" fill="#0B2A50" stroke="#1A7EC8" stroke-width="2"/>
+          <text x="280" y="105" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="12" fill="#1A7EC8">O</text>
+          <circle cx="200" cy="230" r="16" fill="#0B2A50" stroke="#1A7EC8" stroke-width="2"/>
+          <text x="200" y="235" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="12" fill="#1A7EC8">N</text>
+          <circle cx="60" cy="140" r="11" fill="#0B1F3A" stroke="#3D5A73" stroke-width="1.5"/>
+          <circle cx="100" cy="40" r="11" fill="#0B1F3A" stroke="#3D5A73" stroke-width="1.5"/>
+          <circle cx="340" cy="140" r="11" fill="#0B1F3A" stroke="#3D5A73" stroke-width="1.5"/>
+          <circle cx="300" cy="40" r="11" fill="#0B1F3A" stroke="#3D5A73" stroke-width="1.5"/>
+          <circle cx="150" cy="270" r="11" fill="#0B1F3A" stroke="#3D5A73" stroke-width="1.5"/>
+          <circle cx="250" cy="270" r="11" fill="#0B1F3A" stroke="#3D5A73" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="emp-badge">Projetos<br>& Processos<br>Industriais</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTENTABILIDADE -->
+<section id="sustentabilidade">
+  <div class="section-inner">
+    <p class="section-eyebrow">Tecnologia & Sustentabilidade</p>
+    <h2 class="section-title">Desenvolvimento sustentável<br><span>como estratégia de negócio</span></h2>
+    <div class="section-rule"></div>
+    <p class="section-lead">A tecnologia disruptiva é a nossa ferramenta para alinhar crescimento econômico à responsabilidade ambiental e social.</p>
+
+    <div class="sust-grid">
+      <div class="sust-card">
+        <div class="sust-num">01</div>
+        <div class="sust-title">Tecnologia Disruptiva</div>
+        <div class="sust-text">Aplicamos inovações que transformam fundamentalmente os processos produtivos, criando novos padrões de eficiência que substituem abordagens tradicionais.</div>
+      </div>
+      <div class="sust-card">
+        <div class="sust-num">02</div>
+        <div class="sust-title">Desenvolvimento Sustentável</div>
+        <div class="sust-text">Baseado na definição da Comissão Brundtland: atender às necessidades do presente sem comprometer a capacidade das gerações futuras de atenderem às suas próprias necessidades.</div>
+      </div>
+      <div class="sust-card">
+        <div class="sust-num">03</div>
+        <div class="sust-title">Desperdício Visível</div>
+        <div class="sust-text">Identificamos e eliminamos perdas detectáveis no processo produtivo — retrabalho, paradas não planejadas, consumo excessivo de insumos — com impacto direto nos custos.</div>
+      </div>
+      <div class="sust-card">
+        <div class="sust-num">04</div>
+        <div class="sust-title">Desperdício Invisível</div>
+        <div class="sust-text">Diagnosticamos perdas ocultas de eficiência que não aparecem nos relatórios convencionais, mas que oneram silenciosamente o custo operacional da empresa.</div>
+      </div>
+    </div>
+
+    <div class="definition-box">
+      <div class="def-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      </div>
+      <div>
+        <div class="def-label">Definição de Desperdício</div>
+        <p class="def-text">Qualquer recurso — tempo, energia, material ou capital humano — utilizado além do estritamente necessário para entregar valor ao cliente. Eliminar o desperdício, visível ou não, é o caminho mais direto para aumentar competitividade sem elevar custos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO / CTA -->
+<section id="contato">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-eyebrow" style="color:var(--acid); justify-content:center; display:flex; align-items:center; gap:10px;">
+      <span style="width:24px; height:2px; background:var(--acid); display:inline-block;"></span>
+      Fale Conosco
+      <span style="width:24px; height:2px; background:var(--acid); display:inline-block;"></span>
+    </p>
+    <h2 class="section-title" style="color:var(--white);">Solicite um diagnóstico<br><span style="color:var(--acid);">gratuito da sua empresa</span></h2>
+    <div class="section-rule" style="margin: 16px auto 28px;"></div>
+    <p class="section-lead" style="color:rgba(255,255,255,0.65); margin: 0 auto 40px;">Nossa equipe analisa os processos da sua operação e identifica oportunidades de melhoria técnica, eficiência energética e redução de desperdícios.</p>
+
+    <a href="mailto:apportugal@hotmail.com?subject=Solicito%20Diagn%C3%B3stico%20-%20APP%20Engenharia%20Qu%C3%ADmica" class="btn-primary" style="font-size:15px; padding:18px 48px;">
+      Solicitar Diagnóstico Gratuito
+    </a>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="cc-label">E-mail</div>
+        <div class="cc-value">apportugal@hotmail.com</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="cc-label">Área de Atuação</div>
+        <div class="cc-value">Indústrias de transformação e afins</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div class="cc-label">Especialidade</div>
+        <div class="cc-value">Lava-louças e lava-roupas industriais</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 <strong>APP Engenharia Química Projetos Ltda.</strong> — Todos os direitos reservados.</p>
+    <ul class="footer-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#empresa">Empresa</a></li>
+      <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+      <li><a href="mailto:apportugal@hotmail.com">Contato</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
