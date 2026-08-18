@@ -153,20 +153,59 @@ section#empresa .empresa-visual { display:none !important; }
 <style id="empresa-text-width-final">
 #empresa .section-inner{
   width:100% !important;
-  max-width:none !important;
+  
 }
 #empresa .empresa-text{
   width:100% !important;
-  max-width:none !important;
+  
 }
 #empresa .mvv-grid{
   width:100% !important;
-  max-width:none !important;
+  
 }
 @media(max-width:768px){
   #empresa .section-inner,
   #empresa .empresa-text,
   #empresa .mvv-grid{
+    width:100% !important;
+    
+  }
+}
+</style>
+
+<style id="empresa-no-size-restrictions">
+#empresa .section-inner,
+#empresa .empresa-text,
+#empresa .mvv-grid,
+#empresa .mvv-card,
+#empresa .mvv-label,
+#empresa .mvv-text{
+  width:auto !important;
+  max-width:none !important;
+  min-width:0 !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+  box-sizing:border-box !important;
+}
+#empresa .empresa-text,
+#empresa .mvv-grid{
+  width:100% !important;
+}
+#empresa .mvv-card{
+  width:100% !important;
+}
+#empresa .mvv-text{
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+}
+@media(max-width:768px){
+  #empresa .section-inner,
+  #empresa .empresa-text,
+  #empresa .mvv-grid,
+  #empresa .mvv-card{
     width:100% !important;
     max-width:none !important;
   }
